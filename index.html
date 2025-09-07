@@ -14,6 +14,7 @@
             <option value="maple">Maple</option>
             <option value="yew">Yew</option>
             <option value="magic">Magic</option>
+            <option value="redwood">Redwood</option>
         </select>
     </div>
 
@@ -26,11 +27,11 @@
     </div>
 
     <div>
-    Current EXP: <input type="number" id="currentExp" value="0">
+        Current EXP: <input type="number" id="currentExp" value="0">
     </div>
 
     <div>
-        Target EXP: <input type="number" id="targetExp" value="0">
+        Target Level: <input type="number" id="targetLevel" value="0">
     </div>
 
     <button id="calculateBtn">Calculate</button>
@@ -68,18 +69,35 @@ let xpGain = {
         longbow: 91.5,
         carving: 156,
         decoration: 620
+    },
+    redwood: {
+        hikingstaff: 10.5, 
+        carving: 222,
+        decoration: 725
     }
 };
 
-let currentExpInput = document.getElementById('currentExp');
-let targetExpInput = document.getElementById('targetExp');
+const currentExpInput = document.getElementById('currentExp');
+const targetLevelInput = document.getElementById('targetLevel');
+const calculateBtn = document.getElementById('calculateBtn');
+const woodTypeSelect = document.getElementById('woodType');
+const itemFletchedSelect = document.getElementById('itemFletched');
+const levelExp = [0, 83, 174, 276, 388, 512, 650, 801, 969, 1154, 1358, 1584, 1833, 2107, 2411, 2746, 3115, 3523, 3973, 4470, 5018, 5624, 6291, 7028, 7842, 8740, 9730, 10824, 12031, 13363, 14833, 16456, 18247, 20224, 22406, 24815, 27473, 30408, 33648, 37224, 41171, 45529, 50339, 55649, 61512, 67983, 75127, 83014, 91721, 101333, 111945, 123660, 136594, 150872, 166636, 184040, 203254, 224466, 247886, 273742, 302288, 333804, 368599, 407015, 449428, 496254, 547953, 605032, 668051, 737627, 814445, 899257, 992895, 1096278, 1210421, 1336443, 1475581, 1629200, 1798808, 1986068, 2192818, 2421087, 2673114, 2951373, 3258594, 3597792, 3972294, 4385776, 4842295, 5346332, 5902831, 6517253, 7195629, 7944614, 8771558, 9684577, 10692629, 11805606, 13034431];
 
-let calculateBtn = document.getElementById('calculateBtn');
+
+
 calculateBtn.addEventListener('click', calculate);
+woodTypeSelect.addEventListener('change', function() {
+    if (woodTypeSelect.value === 'redwood') {
+        itemFletchedSelect.innerHTML = '<option value="hikingstaff">Hiking Staff</option>';
+    } else {
+        itemFletchedSelect.innerHTML = '<option value="shortbow">Shortbow</option><option value="longbow">Longbow</option>';
+    }
+});
 
 function calculate() {
-    let woodType = document.getElementById('woodType').value;
-    let itemFletched = document.getElementById('itemFletched').value;
+    let woodType = woodTypeSelect.value;
+    let itemFletched = itemFletchedSelect.value;
 
     let fletchExp = xpGain[woodType][itemFletched] * 4;
     let carvingExp = xpGain[woodType].carving * 4;
@@ -87,13 +105,14 @@ function calculate() {
 
     let totalExpPerTotem = fletchExp + carvingExp + decorationExp;
 
-    let expRemaining = parseInt(targetExpInput.value) - parseInt(currentExpInput.value);
+    let targetExp = levelExp[parseInt(targetLevelInput.value) + 1];
+    let expRemaining = targetExp - parseInt(currentExpInput.value);
 
     let totalTotems = Math.ceil(expRemaining / totalExpPerTotem);
-
     let totalLogs = totalTotems * 5; // 5 logs per totem, 4 for fletching, 1 for totem
 
     let resultsDiv = document.getElementById('results');
+
     resultsDiv.innerHTML = `
         Total Totems Needed: ${totalTotems} <br>
         Total Logs Needed: ${totalLogs} <br>
