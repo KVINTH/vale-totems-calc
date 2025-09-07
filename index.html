@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vale Totems Calculator</title>
+</head>
+<body>
+    <div>
+        Wood Type: 
+        <select id="woodType">
+            <option value="oak">Oak</option>
+            <option value="willow">Willow</option>
+            <option value="maple">Maple</option>
+            <option value="yew">Yew</option>
+            <option value="magic">Magic</option>
+        </select>
+    </div>
+
+    <div>
+        Item Fletched:
+        <select id="itemFletched">
+            <option value="shortbow">Shortbow</option>
+            <option value="longbow">Longbow</option>
+        </select>
+    </div>
+
+    <div>
+    Current EXP: <input type="number" id="currentExp" value="0">
+    </div>
+
+    <div>
+        Target EXP: <input type="number" id="targetExp" value="0">
+    </div>
+
+    <button id="calculateBtn">Calculate</button>
+
+    <div id="results"></div>
+</body>
+<script>
+let xpGain = {
+    oak: {
+        shortbow: 16.5,
+        longbow: 25,
+        carving: 12.5,
+        decoration: 51.5
+    },
+    willow: {
+        shortbow: 33.3,
+        longbow: 41.5,
+        carving: 31.5,
+        decoration: 126
+    },
+    maple: { 
+        shortbow: 50,
+        longbow: 58.3,
+        carving: 51,
+        decoration: 201
+    },
+    yew: { 
+        shortbow: 67.5,
+        longbow: 75,
+        carving: 82,
+        decoration: 326
+    },
+    magic: {
+        shortbow: 83.3,
+        longbow: 91.5,
+        carving: 156,
+        decoration: 620
+    }
+};
+
+let currentExpInput = document.getElementById('currentExp');
+let targetExpInput = document.getElementById('targetExp');
+
+let calculateBtn = document.getElementById('calculateBtn');
+calculateBtn.addEventListener('click', calculate);
+
+function calculate() {
+    let woodType = document.getElementById('woodType').value;
+    let itemFletched = document.getElementById('itemFletched').value;
+
+    let fletchExp = xpGain[woodType][itemFletched] * 4;
+    let carvingExp = xpGain[woodType].carving * 4;
+    let decorationExp = xpGain[woodType].decoration * 4;
+
+    let totalExpPerTotem = fletchExp + carvingExp + decorationExp;
+
+    let expRemaining = parseInt(targetExpInput.value) - parseInt(currentExpInput.value);
+
+    let totalTotems = Math.ceil(expRemaining / totalExpPerTotem);
+
+    let totalLogs = totalTotems * 5; // 5 logs per totem, 4 for fletching, 1 for totem
+
+    let resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = `
+        Total Totems Needed: ${totalTotems} <br>
+        Total Logs Needed: ${totalLogs} <br>
+        Total Fletching EXP per Totem: ${fletchExp} <br>
+        Total Carving EXP per Totem: ${carvingExp} <br>
+        Total Decoration EXP per Totem: ${decorationExp} <br>
+        Total EXP per Totem: ${totalExpPerTotem} <br>
+    `;
+}
+
+
+</script>
+</html>
