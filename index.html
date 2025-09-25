@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vale Totems Calculator</title>
+    
 </head>
 <body>
+    <a href="prayer.html">Varlamore Prayer Calculator</a>
     <div>
         Wood Type: 
         <select id="woodType">
@@ -105,7 +107,7 @@ function calculate() {
 
     let totalExpPerTotem = fletchExp + carvingExp + decorationExp;
 
-    let targetExp = levelExp[parseInt(targetLevelInput.value) + 1];
+    let targetExp = levelExp[parseInt(targetLevelInput.value) - 1];
     let expRemaining = targetExp - parseInt(currentExpInput.value);
 
     let totalTotems = Math.ceil(expRemaining / totalExpPerTotem);

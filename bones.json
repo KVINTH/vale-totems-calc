@@ -1,0 +1,74 @@
+[
+  { 
+    "name": "Blessed Bones", 
+    "shards": 4 
+  },
+  {
+    "name": "Blessed Bat Bones", 
+    "shards": 5
+  },
+  {
+    "name": "Blessed Big Bones", 
+    "shards": 12
+  },
+  {
+    "name": "Blessed Zogre Bones", 
+    "shards": 18
+  },
+  {
+    "name": "Blessed Babydragon Bones", 
+    "shards": 24
+  },
+  {
+    "name": "Blessed Babywyrm Bones", 
+    "shards": 21
+  },
+  {
+    "name": "Blessed Dragon Bones", 
+    "shards": 58
+  },
+  {
+    "name": "Blessed Lava Dragon Bones", 
+    "shards": 68
+  },
+  {
+    "name": "Blessed Wyvern Bones", 
+    "shards": 58
+  },
+  {
+    "name": "Blessed Superior Dragon Bones", 
+    "shards": 121
+  },
+  {
+    "name": "Blessed Wyrm Bones", 
+    "shards": 42
+  },
+  {
+    "name": "Blessed Drake Bones", 
+    "shards": 67
+  },
+  {
+    "name": "Blessed Hydra Bones", 
+    "shards": 93
+  },
+  {
+    "name": "Blessed Fayrg Bones", 
+    "shards": 67
+  },
+  {
+    "name": "Blessed Raurg Bones", 
+    "shards": 77
+  },
+  {
+    "name": "Blessed Ourg Bones", 
+    "shards": 115
+  },
+  {
+    "name": "Dagannoth Bones (Blessed)", 
+    "shards": 100
+  },
+  {
+    "name": "Sun-Kissed Bones", 
+    "shards": 45
+  }
+]
